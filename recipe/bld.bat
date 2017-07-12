@@ -5,6 +5,7 @@ cmake ^
     -G "%CMAKE_GENERATOR%" ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+    -DCMAKE_POSITION_INDEPENDENT_CODE=1 ^
     ..
 
 cmake --build . --config Release
