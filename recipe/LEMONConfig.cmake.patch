@@ -1,0 +1,30 @@
+--- cmake/LEMONConfig.cmake.in	2017-07-28 17:49:49.000000000 -0400
++++ cmake/LEMONConfig.cmake.in.patched	2017-07-28 17:53:38.000000000 -0400
+@@ -1,11 +1,22 @@
+ SET(LEMON_INCLUDE_DIR "@CMAKE_INSTALL_PREFIX@/include" CACHE PATH "LEMON include directory")
+ SET(LEMON_INCLUDE_DIRS "${LEMON_INCLUDE_DIR}")
+ 
+-IF(UNIX)
+-  SET(LEMON_LIB_NAME "libemon.a")
+-ELSEIF(WIN32)
+-  SET(LEMON_LIB_NAME "lemon.lib")
+-ENDIF(UNIX)
++
++IF(@BUILD_SHARED_LIBS@)
++    IF(APPLE)
++      SET(LEMON_LIB_NAME "libemon.dylib")
++    ELSEIF(UNIX)
++      SET(LEMON_LIB_NAME "libemon.so")
++    ELSEIF(WIN32)
++      SET(LEMON_LIB_NAME "lemon.dll")
++    ENDIF(UNIX)
++ELSE()
++    IF(UNIX)
++      SET(LEMON_LIB_NAME "libemon.a")
++    ELSEIF(WIN32)
++      SET(LEMON_LIB_NAME "lemon.lib")
++    ENDIF(UNIX)
++ENDIF()
+ 
+ SET(LEMON_LIBRARY "@CMAKE_INSTALL_PREFIX@/lib/${LEMON_LIB_NAME}" CACHE FILEPATH "LEMON library")
+ SET(LEMON_LIBRARIES "${LEMON_LIBRARY}")
