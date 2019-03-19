@@ -16,6 +16,14 @@ source:
    # for this:
    # http://lemon.cs.elte.hu/pipermail/lemon-devel/2017-May/000392.html
     - glpk_win.diff    # [win]
+   # Note: switching to the conda compilers introduced a build error with
+   # clang 4.0.2:
+   #   lemon/path.h:231:24: error: no viable conversion from
+   #  'typename PredMapPath<Digraph, NodeMap<Arc> >::RevArcIt' to 'value_type'
+   # this patch is similar to the proposition in
+   # https://stackoverflow.com/a/33641030
+   # and uses the explicit cast operator to Arc.
+    - 0001-fix-build-error-with-clang-4.patch  # [osx]
 
 build:
   number: 2
