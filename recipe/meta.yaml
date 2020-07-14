@@ -25,6 +25,11 @@ source:
    # and uses the explicit cast operator to Arc.
     - 0001-fix-build-error-with-clang-4.patch  # [osx]
 
+   # The generated LEMONConfig.cmake file hard-codes static
+   # library paths, even if BUILD_SHARED_LIBS=1
+   # This patch fixes that.
+    - LEMONConfig.cmake.patch
+
 build:
   number: 2
 
@@ -46,9 +51,11 @@ requirements:
 test:
   commands:
     - test -f $PREFIX/include/lemon/glpk.h                 # [unix]
-    - test -f $PREFIX/lib/libemon.a                        # [unix]
+    - test -f $PREFIX/lib/libemon.so                       # [linux]
+    - test -f $PREFIX/lib/libemon.dylib                    # [osx]
     - if not exist %LIBRARY_INC%\\lemon\\glpk.h exit 1     # [win]
     - if not exist %LIBRARY_LIB%\\lemon.lib exit 1         # [win]
+    - if not exist %LIBRARY_LIB%\\lemon.dll exit 1         # [win]
 
 about:
   home: https://lemon.cs.elte.hu/trac/lemon
@@ -59,3 +66,4 @@ about:
 extra:
   recipe-maintainers:
     - bluescarni
+    - stuarteberg
