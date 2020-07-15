@@ -156,5 +156,6 @@ Feedstock Maintainers
 =====================
 
 * [@bluescarni](https://github.com/bluescarni/)
+* [@k-dominik](https://github.com/k-dominik/)
 * [@stuarteberg](https://github.com/stuarteberg/)
 
