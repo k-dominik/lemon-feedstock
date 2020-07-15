@@ -6,6 +6,7 @@ cmake ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DCMAKE_POSITION_INDEPENDENT_CODE=1 ^
+    -DBUILD_SHARED_LIBS=0 ^
     ..
 
 cmake --build . --config Release

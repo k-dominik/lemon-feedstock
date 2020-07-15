@@ -8,17 +8,32 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ version  }}.tar.gz
+  url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
+   # Note: switching to the conda compilers introduced a build error with
+   # clang 4.0.2:
+   #   lemon/path.h:231:24: error: no viable conversion from
+   #  'typename PredMapPath<Digraph, NodeMap<Arc> >::RevArcIt' to 'value_type'
+   # this patch is similar to the proposition in
+   # https://stackoverflow.com/a/33641030
+   # and uses the explicit cast operator to Arc.
+    - 0001-fix-build-error-with-clang-4.patch
    # NOTE: this disables the installation of the glpk dlls
    # from the lemon build system. An issue has been raised upstream
    # for this:
    # http://lemon.cs.elte.hu/pipermail/lemon-devel/2017-May/000392.html
-    - glpk_win.diff    # [win]
+    - 0002-glpk_win.diff
+   # The generated LEMONConfig.cmake file hard-codes static
+   # library paths, even if BUILD_SHARED_LIBS=1
+   # This patch fixes that.
+    - 0003-LEMONConfig.cmake.patch
 
 build:
-  number: 1
+  number: 2
+  run_exports:
+    # Windows is only built with static library.
+    - {{ pin_subpackage('lemon', max_pin='x.x.x') }}  # [not win]
 
 requirements:
   build:
@@ -38,16 +53,19 @@ requirements:
 test:
   commands:
     - test -f $PREFIX/include/lemon/glpk.h                 # [unix]
-    - test -f $PREFIX/lib/libemon.a                        # [unix]
+    - test -f $PREFIX/lib/libemon.so                       # [linux]
+    - test -f $PREFIX/lib/libemon.dylib                    # [osx]
     - if not exist %LIBRARY_INC%\\lemon\\glpk.h exit 1     # [win]
     - if not exist %LIBRARY_LIB%\\lemon.lib exit 1         # [win]
 
 about:
   home: https://lemon.cs.elte.hu/trac/lemon
-  license: Boost-1.0
+  license: BSL-1.0
   license_file: LICENSE
   summary: 'Library for Efficient Modeling and Optimization in Networks'
 
 extra:
   recipe-maintainers:
     - bluescarni
+    - stuarteberg
+    - k-dominik
