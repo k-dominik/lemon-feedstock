@@ -11,11 +11,6 @@ source:
   url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-   # NOTE: this disables the installation of the glpk dlls
-   # from the lemon build system. An issue has been raised upstream
-   # for this:
-   # http://lemon.cs.elte.hu/pipermail/lemon-devel/2017-May/000392.html
-    - glpk_win.diff    # [win]
    # Note: switching to the conda compilers introduced a build error with
    # clang 4.0.2:
    #   lemon/path.h:231:24: error: no viable conversion from
@@ -23,12 +18,17 @@ source:
    # this patch is similar to the proposition in
    # https://stackoverflow.com/a/33641030
    # and uses the explicit cast operator to Arc.
-    - 0001-fix-build-error-with-clang-4.patch  # [osx]
-
+    - 0001-fix-build-error-with-clang-4.patch
+   # NOTE: this disables the installation of the glpk dlls
+   # from the lemon build system. An issue has been raised upstream
+   # for this:
+   # http://lemon.cs.elte.hu/pipermail/lemon-devel/2017-May/000392.html
+    - 0002-glpk_win.diff
    # The generated LEMONConfig.cmake file hard-codes static
    # library paths, even if BUILD_SHARED_LIBS=1
    # This patch fixes that.
-    - LEMONConfig.cmake.patch
+    - 0003-LEMONConfig.cmake.patch
+    - 0004-GENERATE_EXPORT_HEADER.patch
 
 build:
   number: 2
