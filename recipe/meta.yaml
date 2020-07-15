@@ -28,7 +28,6 @@ source:
    # library paths, even if BUILD_SHARED_LIBS=1
    # This patch fixes that.
     - 0003-LEMONConfig.cmake.patch
-    - 0004-GENERATE_EXPORT_HEADER.patch
 
 build:
   number: 2
@@ -55,7 +54,6 @@ test:
     - test -f $PREFIX/lib/libemon.dylib                    # [osx]
     - if not exist %LIBRARY_INC%\\lemon\\glpk.h exit 1     # [win]
     - if not exist %LIBRARY_LIB%\\lemon.lib exit 1         # [win]
-    - if not exist %LIBRARY_LIB%\\lemon.dll exit 1         # [win]
 
 about:
   home: https://lemon.cs.elte.hu/trac/lemon
