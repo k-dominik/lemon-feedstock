@@ -17,4 +17,4 @@ cmake --build . --config Release --target bfs_test
 ctest -R error_test
 ctest -R bfs_test
 
-cmake --build . --config Release --target install
+cmake --install . --config Release
