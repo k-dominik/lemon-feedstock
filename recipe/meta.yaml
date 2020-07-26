@@ -30,7 +30,7 @@ source:
     - 0003-LEMONConfig.cmake.patch
 
 build:
-  number: 2
+  number: 3
   run_exports:
     # Windows is only built with static library.
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}  # [not win]
