@@ -15,9 +15,6 @@ cmake --build . --config Release
 cmake --build . --config Release --target error_test
 cmake --build . --config Release --target bfs_test
 
-REM HACK HACK HACK
-set PATH=lemon/Release;%PATH%
-
 ctest -R error_test
 ctest -R bfs_test
 
