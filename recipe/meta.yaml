@@ -33,10 +33,12 @@ source:
    # even when building with -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=1, global data
    # symbols cannot be accessed.
    # This patch exposes those data symbols
-    - 0004-allow-symbols-to-be-exported-in-shard-libs-on-win.patch
+    - 0004-allow-symbols-to-be-exported-in-shard-libs-on-win.patch  # [win]
+   # DLL has to be specified in install command
+    - 0005-added-dll-to-install-target.patch  # [win]
 
 build:
-  number: 3
+  number: 4
   run_exports:
     # Windows is only built with static library.
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}  # [not win]
