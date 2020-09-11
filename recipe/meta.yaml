@@ -38,7 +38,7 @@ source:
     - 0005-added-dll-to-install-target.patch  # [win]
     - 0006-SQUASHTO_0004_if_works.patch  # [win]
 build:
-  number: 100
+  number: 111
   run_exports:
     # Windows is only built with static library.
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}  # [not win]
