@@ -1,0 +1,25 @@
+From de4813de90c567d9951953932b9a1bc87d18fcb1 Mon Sep 17 00:00:00 2001
+From: k-dominik <k-dominik@users.noreply.github.com>
+Date: Fri, 11 Sep 2020 09:38:54 +0200
+Subject: [PATCH] squashlater: added export to invalid struct
+
+---
+ lemon/core.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lemon/core.h b/lemon/core.h
+index 2e66366..fcce4ba 100644
+--- a/lemon/core.h
++++ b/lemon/core.h
+@@ -62,7 +62,7 @@ namespace lemon {
+   ///
+   /// Dummy type to make it easier to create invalid iterators.
+   /// See \ref INVALID for the usage.
+-  struct Invalid {
++  struct LEMON_EXPORT Invalid {
+   public:
+     bool operator==(Invalid) { return true;  }
+     bool operator!=(Invalid) { return false; }
+-- 
+2.25.1
+

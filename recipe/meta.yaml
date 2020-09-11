@@ -36,9 +36,9 @@ source:
     - 0004-allow-symbols-to-be-exported-in-shard-libs-on-win.patch  # [win]
    # DLL has to be specified in install command
     - 0005-added-dll-to-install-target.patch  # [win]
-
+    - 0006-SQUASHTO_0004_if_works.patch  # [win]
 build:
-  number: 4
+  number: 100
   run_exports:
     # Windows is only built with static library.
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}  # [not win]
