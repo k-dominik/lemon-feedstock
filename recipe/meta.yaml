@@ -29,9 +29,14 @@ source:
    # library paths, even if BUILD_SHARED_LIBS=1
    # This patch fixes that.
     - 0003-LEMONConfig.cmake.patch
+   # For shared libs, no windows symbols are exported per default on windows.
+   # even when building with -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=1, global data
+   # symbols cannot be accessed.
+   # This patch exposes those data symbols
+    - 0004-allow-symbols-to-be-exported-in-shard-libs-on-win.patch
 
 build:
-  number: 2
+  number: 10
   run_exports:
     # Windows is only built with static library.
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}  # [not win]
