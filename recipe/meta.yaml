@@ -35,8 +35,7 @@ source:
 build:
   number: 10
   run_exports:
-    # Windows is only built with static library.
-    - {{ pin_subpackage('lemon', max_pin='x.x.x') }}  # [not win]
+    - {{ pin_subpackage('lemon', max_pin='x.x.x') }}
 
 requirements:
   build:
@@ -60,6 +59,8 @@ test:
     - test -f $PREFIX/lib/libemon.dylib                    # [osx]
     - if not exist %LIBRARY_INC%\\lemon\\glpk.h exit 1     # [win]
     - if not exist %LIBRARY_LIB%\\lemon.lib exit 1         # [win]
+    - if not exist %LIBRARY_BIN%\\lemon.dll exit 1         # [win]
+
 
 about:
   home: https://lemon.cs.elte.hu/trac/lemon
