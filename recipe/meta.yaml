@@ -29,9 +29,11 @@ source:
    # library paths, even if BUILD_SHARED_LIBS=1
    # This patch fixes that.
     - 0003-LEMONConfig.cmake.patch
+   # export symbols for shared lib on windows
+    - 0004-allow-symbols-to-be-exported-in-shard-libs-on-win.patch  # [win]
 
 build:
-  number: 2
+  number: 10
   run_exports:
     # Windows is only built with static library.
     - {{ pin_subpackage('lemon', max_pin='x.x.x') }}  # [not win]
